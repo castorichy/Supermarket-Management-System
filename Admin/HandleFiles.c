@@ -68,13 +68,11 @@ int saveItemsToFile(int numItems, item_lst *items)
     {
         return -1;
     }
-    printf("price = %d", items[0].Price);
-
-    fprintf(fp, "Code\t\t| Item Name \t\t| QTY\t\t\t| price\n");
-    fprintf(fp, "_______________________________________________________________________\n");
+    fprintf(fp, "Code\t| Item Name \t| QTY\t| price\n");
+    fprintf(fp, "______________________________________\n");
     for (i = 0; i < numItems; i++)
     {
-        fprintf(fp, "%d. \t\t\t| %s\t\t\t| %d\t\t\t| %d\n", num_items, items[i].itemName, items[i].quantity, items[i].Price);
+        fprintf(fp, "%d. \t| %s\t| %d\t| %d\n", num_items, items[i].itemName, items[i].quantity, items[i].Price);
         num_items++;
     }
     
@@ -101,7 +99,7 @@ int AppendToFile(int numItems, item_lst *items)
 
     for (i = 0; i < numItems; i++)
     {
-        fprintf(fp, "%d. \t\t\t| %s\t\t\t| %d\t\t\t| %d\n", num_items, items[i].itemName, items[i].quantity, items[i].Price);
+        fprintf(fp, "%d. \t| %s\t| %d\t| %d\n", num_items, items[i].itemName, items[i].quantity, items[i].Price);
         num_items++;
     }
     
@@ -138,8 +136,9 @@ int readItemsInFile()
         ch = fgetc(fp);
         item_list[i++] = ch;
     }
+    system("clear");
     printf("\t\t\tItem list\n");
-    printf("________________________________________________________________\n\n");
+    printf("________________________________________\n\n");
     printf("%s", item_list);
     
     fclose(fp);

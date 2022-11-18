@@ -10,11 +10,11 @@ const int max_items = 20;
 void hearder()
 {
     system("clear");
-    printf("**************************************************************\n");
-    printf("*                 SuperMarket Management System              *\n");
-    printf("*                                                            *\n");
-    printf("*                         Admin Dashboard                    *\n");
-    printf("**************************************************************\n\n");
+    printf("*************************************\n");
+    printf("*   SuperMarket Management System   *\n");
+    printf("*                                   *\n");
+    printf("*       Admin Dashboard             *\n");
+    printf("*************************************\n\n");
 }
 
 /**
@@ -30,16 +30,16 @@ int AdminDashboard()
 
     hearder();
 
-    printf("Code\t\t\t| Choices\t\t| status\n");
-    printf("________________________________________________________________\n");
-    printf("1. \t\t\tAdd Items\t\tAvailable\n");
-    printf("2. \t\t\tView Items\t\tAvailable\n");
-    printf("3. \t\t\tAdd Castomer\t\tNot Available\n");
-    printf("4. \t\t\tPrint Reciept\t\tNot Available\n");
-    printf("5. \t\t\tDelete Items\t\tAvailable\n");
-    printf("6. \t\t\tHelp\t\t\tNot Available\n");
+    printf("Code\t| Choices\t| status\n");
+    printf("_____________________________________\n");
+    printf("1. \tAdd Items\tAvailable\n");
+    printf("2. \tView Items\tAvailable\n");
+    printf("3. \tAdd Castomer\tNot Available\n");
+    printf("4. \tPrint Reciept\tNot Available\n");
+    printf("5. \tDelete Items\tAvailable\n");
+    printf("6. \tHelp\t\tNot Available\n");
 
-    printf("________________________________________________________________\n");
+    printf("_____________________________________\n");
     printf("Enter your Choice code here: ");
     scanf("%d", &code);
     if (code < 1 || code > max_items)
@@ -103,7 +103,7 @@ void handleChoiceError()
 {
     char ch;
 
-    printf("You entered invalid code do you want to return y/n: ");
+    printf("You entered invalid code\nDo you want to return y/n: ");
     scanf("%s", &ch);
     if (ch == 'y' || ch ==  'Y')
     {
@@ -128,13 +128,13 @@ int addItems()
     hearder();
     
     printf("\n\t\tAdd Items\n");
-    printf("________________________________________________________________\n");
+    printf("____________________________________\n");
     printf("Number of Items to add: ");
     scanf("%d", &numItems);
 
     if (numItems > max_items)
     {
-        printf("You can only add up to 5 items at a time\n");
+        printf("You can only add up to %d items at a time\n", max_items);
         printf("Do you want to continue? Y/n: ");
         scanf("%s", &ch);
 
@@ -206,7 +206,7 @@ int viewItems(int itemNumber)
     hearder();
 
     printf("\n\t\tView Items\n");
-    printf("________________________________________________________________\n");
+    printf("____________________________________\n");
     printf("Do you want to view all Items? Y/n\n");
     scanf("%s", &ch);
 

@@ -8,7 +8,7 @@ int check_user(void)
 {
     int user;
     system("clear");
-    printf("Select User;\n1. Admin. \n2. Cashier.\n");
+    printf("\t\tSelect User\n\t1. Admin. \n\t2. Cashier.\n");
     scanf("%d", &user);
 
     if (user == 1)
@@ -45,14 +45,15 @@ void adminLogin(void)
 
     home:
     system("clear");
-    printf("\n\tWELCOME TO CASTORICHY SUPERMAKET\n\tPlease Log In To Your account\n");
-    printf("________________________________________________________________\n");
-    printf("\n\t%s POTAL\n\tLogIn TO your Account\n", userNAme);
-    printf("________________________________________________________________\n");
-    printf("\tName: ");
+   /* printf("\n\tWELCOME TO CASTORICHY SUPERMAKET\n\tPlease Log In To Your account\n");
+    printf("________________________________________________________________\n");*/
+
+    hearder();
+    printf("\n\t%s POTAL\n\t\t\tPlease LogIn\n", userNAme);
+    printf("______________________________________\n");
+    printf("\t\tName: ");
     scanf("%s", UserDetailsLogIn->userName);
-    printf("________________________________________________________________\n");
-    printf("\tPassword: ");
+    printf("\t\tPassword: ");
     scanf("%s", UserDetailsLogIn->passwd);
     printf("\n");
     /*calling checklogin Function*/
