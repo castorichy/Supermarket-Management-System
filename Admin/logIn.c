@@ -55,7 +55,7 @@ void adminLogin(void)
     printf("\tPassword: ");
     scanf("%s", UserDetailsLogIn->passwd);
     printf("\n");
-    /*callin checklogin Function*/
+    /*calling checklogin Function*/
     logStatus = checkLogin("admin",
         "password", 
         UserDetailsLogIn->userName,

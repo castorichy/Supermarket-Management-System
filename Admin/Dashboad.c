@@ -1,5 +1,7 @@
 #include "func_h.h"
 
+const int max_items = 20;
+
 /**
  * hearder - andmin hearder page
  * 
@@ -30,16 +32,17 @@ int AdminDashboard()
 
     printf("Code\t\t\t| Choices\t\t| status\n");
     printf("________________________________________________________________\n");
-    printf("1. \t\t\tAdd Items\t\tNot Available\n");
-    printf("2. \t\t\tView Items\t\tNot Available\n");
+    printf("1. \t\t\tAdd Items\t\tAvailable\n");
+    printf("2. \t\t\tView Items\t\tAvailable\n");
     printf("3. \t\t\tAdd Castomer\t\tNot Available\n");
     printf("4. \t\t\tPrint Reciept\t\tNot Available\n");
-    printf("5. \t\t\tHelp\t\t\tNot Available\n");
+    printf("5. \t\t\tDelete Items\t\tAvailable\n");
+    printf("6. \t\t\tHelp\t\t\tNot Available\n");
 
     printf("________________________________________________________________\n");
     printf("Enter your Choice code here: ");
     scanf("%d", &code);
-    if (code < 1 || code > 5)
+    if (code < 1 || code > max_items)
         handleChoiceError();
     else
         handleChoices(code);
@@ -79,6 +82,12 @@ int handleChoices(int code)
         }
         case 5:
         {
+            DeleteAllCont();
+            break;
+        }
+
+        case 6:
+        {
             help();
             break;
         }
@@ -113,14 +122,9 @@ void handleChoiceError()
 int addItems()
 {
     char ch;
-    int numItems, i;
-    item_lst ItemsDetails[5];
-    /*
-    * item[20][0] = item number
-    * item[20][1] = item name
-    * item[20][2] = item price
-    * item[20][3] = item quantity
-    */
+    int numItems, i = 0;
+    item_lst *ItemsDetails = malloc(sizeof(item_lst) * max_items);
+    
     hearder();
     
     printf("\n\t\tAdd Items\n");
@@ -128,7 +132,7 @@ int addItems()
     printf("Number of Items to add: ");
     scanf("%d", &numItems);
 
-    if (numItems > 5)
+    if (numItems > max_items)
     {
         printf("You can only add up to 5 items at a time\n");
         printf("Do you want to continue? Y/n: ");
@@ -142,21 +146,37 @@ int addItems()
         {
             AdminDashboard();
         }
-
     }
-
-    for (i = 0; i < numItems; i++)
+    else
     {
-        ItemsDetails[i].ItemNumber = i;
-        printf("Enter the Item Name: ");
-        scanf("%s", ItemsDetails[i].itemName);
-        printf("Enter the Item Price: ");
-        scanf("%d", &ItemsDetails[i].Price);
-        printf("Enter the Item Quantity: ");
-        scanf("%d", &ItemsDetails[i].quantity);
-    }
+        while (i < numItems)
+        {
+            if (ItemsDetails == NULL)
+            {
+                free(ItemsDetails);
+                printf("Not enough memory\n");
+                exit(1);
+            }
 
-    ToMainMenu();
+            ItemsDetails[i].ItemNumber = i;
+            printf("\t\tItem [%d]\n", ItemsDetails[i].ItemNumber + 1);
+            printf("\t\t---------\n");
+            printf("\tItem Name: ");
+            scanf("%s", ItemsDetails[i].itemName);
+            printf("\n\tItem Price: ");
+            scanf("%d", &ItemsDetails[i].Price);
+            printf("\n\tItem Quantity: ");
+            scanf("%d", &ItemsDetails[i].quantity);
+
+            i++;
+        }
+    }
+    i = checkFile(numItems, ItemsDetails);
+    if (i == 0)
+        ToMainMenu();
+    else
+        printf("Failed to save items to file");
+    free(ItemsDetails);
 
     return (0);
 }
@@ -167,7 +187,19 @@ int addItems()
 
 int viewItems(int itemNumber)
 {
-    char ch;
+    int err;
+
+    (void)itemNumber;
+
+    err = readItemsInFile();
+
+    if (err != 0)
+    {
+        printf("Nothing in the file\n");
+    }
+    
+
+    /*char ch;
     int i, size;
     item_lst ItemsDetails[5];
 
@@ -205,7 +237,8 @@ int viewItems(int itemNumber)
             printf("Item Quantity: %d\n\n", ItemsDetails[i].quantity);
         }
 
-    }
+    }*/
+    
     return (0);
 }
 
@@ -226,6 +259,15 @@ int addCastomer()
 int printReciept()
 {
     hearder();
+    return (0);
+}
+
+int DeleteAllCont()
+{
+    hearder();
+    DeleteAll();
+    printf("All content in File deleted\n");
+    ToMainMenu();
     return (0);
 }
 

@@ -6,6 +6,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+
+
 /*----------------------
 |      structure        |
 ------------------------*/
@@ -15,7 +17,6 @@ typedef struct lst
     int quantity;
     int Price;
     int ItemNumber;
-    struct lst *next;
 }item_lst;
 
 typedef struct log
@@ -47,5 +48,15 @@ int printReciept();
 int help();
 void handleChoiceError();
 void ToMainMenu();
+int DeleteAllCont();
+
+/*----------------------
+|      HandleFiles.c file    |
+------------------------*/
+int saveItemsToFile(int numItems, item_lst *item);
+int readItemsInFile();
+int checkFile(int numItems, item_lst *items);
+int AppendToFile(int numItems, item_lst *items);
+int DeleteAll();
 
 #endif /*FUNC_H_H*/
