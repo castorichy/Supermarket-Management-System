@@ -9,6 +9,6 @@
 
 int main(void)
 {
-    logIn();
+    adminLogin();
     return (0);
 }
